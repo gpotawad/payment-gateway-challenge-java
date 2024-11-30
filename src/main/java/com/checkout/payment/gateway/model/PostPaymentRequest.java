@@ -3,10 +3,13 @@ package com.checkout.payment.gateway.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
+//TODO: add validations
 public class PostPaymentRequest implements Serializable {
 
   @JsonProperty("card_number_last_four")
   private int cardNumberLastFour;
+  @JsonProperty("card_number")
+  private String cardNumber;
   @JsonProperty("expiry_month")
   private int expiryMonth;
   @JsonProperty("expiry_year")
@@ -15,12 +18,22 @@ public class PostPaymentRequest implements Serializable {
   private int amount;
   private int cvv;
 
+  public PostPaymentRequest(){}
+
   public int getCardNumberLastFour() {
     return cardNumberLastFour;
   }
 
   public void setCardNumberLastFour(int cardNumberLastFour) {
     this.cardNumberLastFour = cardNumberLastFour;
+  }
+
+  public void setCardNumber(String cardNumber) {
+    this.cardNumber = cardNumber;
+  }
+
+  public String getCardNumber() {
+    return cardNumber;
   }
 
   public int getExpiryMonth() {
