@@ -3,8 +3,9 @@ package com.checkout.payment.gateway.aquiringbank;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
+import java.util.UUID;
 
-public class PaymentValidationRequest {
+public class BankRequest {
 
     @JsonProperty("card_number")
     private String cardNumber;
@@ -18,19 +19,9 @@ public class PaymentValidationRequest {
 
     private String cvv;
 
-    public PaymentValidationRequest() {}
+    private UUID key;
 
-    public PaymentValidationRequest(String cardNumber, String expiryDate, String currency, int amount, String cvv) {
-        this.cardNumber = cardNumber;
-        this.expiryDate = expiryDate;
-        this.currency = currency;
-        this.amount = amount;
-        this.cvv = cvv;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
+    public BankRequest() {}
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
@@ -68,21 +59,25 @@ public class PaymentValidationRequest {
         this.cvv = cvv;
     }
 
+    public UUID getKey() { return this.key; }
+    public void setKey(UUID key) { this.key = key; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PaymentValidationRequest that = (PaymentValidationRequest) o;
+        BankRequest that = (BankRequest) o;
         return amount == that.amount &&
                 Objects.equals(cardNumber, that.cardNumber) &&
                 Objects.equals(expiryDate, that.expiryDate) &&
                 Objects.equals(currency, that.currency) &&
+                Objects.equals(key, that.key) &&
                 Objects.equals(cvv, that.cvv);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cardNumber, expiryDate, currency, amount, cvv);
+        return Objects.hash(cardNumber, expiryDate, currency, amount, cvv, key);
     }
 
     @Override
@@ -93,6 +88,7 @@ public class PaymentValidationRequest {
                 ", currency='" + currency + '\'' +
                 ", amount=" + amount +
                 ", cvv='" + cvv + '\'' +
+                ", key='" + key + '\'' +
                 '}';
     }
 }

@@ -1,18 +1,24 @@
 package com.checkout.payment.gateway.aquiringbank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
+import java.util.UUID;
 
-public class PaymentValidationResponse {
+public class BankResponse {
     private boolean authorized;
 
     @JsonProperty("authorization_code")
     private String authorizationCode;
 
-    public PaymentValidationResponse() {}
+    @JsonIgnore
+    private UUID key;
 
-    public PaymentValidationResponse(boolean authorized, String authorizationCode) {
+    public BankResponse() {
+    }
+
+    public BankResponse(boolean authorized, String authorizationCode) {
         this.authorized = authorized;
         this.authorizationCode = authorizationCode;
     }
@@ -33,11 +39,19 @@ public class PaymentValidationResponse {
         this.authorizationCode = authorizationCode;
     }
 
+    public UUID getKey() {
+        return this.key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PaymentValidationResponse that = (PaymentValidationResponse) o;
+        BankResponse that = (BankResponse) o;
         return authorized == that.authorized &&
                 Objects.equals(authorizationCode, that.authorizationCode);
     }

@@ -3,7 +3,8 @@ package com.checkout.payment.gateway.model;
 import com.checkout.payment.gateway.enums.PaymentStatus;
 import java.util.UUID;
 
-public class GetPaymentResponse {
+//TODO: Enhance response to show timestamp and co-relation id / authorizationCode for payment detail
+public class PaymentResponse {
   private UUID id;
   private PaymentStatus status;
   private int cardNumberLastFour;
@@ -11,6 +12,7 @@ public class GetPaymentResponse {
   private int expiryYear;
   private String currency;
   private int amount;
+
 
   public UUID getId() {
     return id;
